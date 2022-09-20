@@ -82,3 +82,10 @@ write_csv(lotr_words, file = "data/lotr_words_df.csv")
 Don't use read.csv only use read_csv
 
 Can tell R to ignore things in the .gitignore tab by just typing in name of thing you want to ignore. `data/lotr_words_df.csv` for example
+
+If you want to discard changes you made, in the commit window you can delete the change but you can't take it back so be fr.
+
+Reminder:
+tidyverse works with CSVs
+readxl works with excel sheets
+haven works with SAS, or other file types 

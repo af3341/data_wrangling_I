@@ -5,6 +5,8 @@ output: github_document
 
 ```{r, echo = FALSE, message = FALSE}
 library(tidyverse)
+library(readxl)
+library(haven)
 ```
 
 ## Data Import: CSVs
@@ -15,5 +17,65 @@ Let's import data using the `readr` package
 litters_df = read_csv("./data/FAS_litters.csv")
 litters_df = janitor::clean_names(litters_df)
 ```
+```{r}
+litters_df
 
+head(litters_df)
+tail(litters_df)
+```
+
+```{r, eval = FALSE}
+view(litters_df)
+```
+
+Skimr package :: means use the skim function
+```{r}
+skimr::skim(litters_df)
+```
+
+`read_csv` options ..
+
+How to say the data here is missing and how to skip rows with `skip =`
+```{r, eval = FALSE}
+read_csv("data/FAS_litters.csv", na = c("", "NA"))
+```
+
+## OTHER FILE FORMATS
+
+We need to read in an excel spreadsheet...
+
+```{r}
+mlb_df = read_excel("data/mlb11.xlsx")
+```
+
+```{r, eval = FALSE}
+View(mlb_df)
+```
+
+read_excel("data/mlb11.xlsx")
+```{r}
+lotr_words = read_excel(
+  "data/LotR_Words.xlsx",
+  range = "B3:D6")
+```
+
+```{r,eval = FALSE}
+View(lotr_words)
+```
+
+## Still more formats...
+
+Read in a SAS dataset
+
+```{r, eval = FALSE}
+pulse_df = read_sas("data/public_pulse_data.sas7bdat")
+View(pulse_df)
+```
+
+## Data Export
+
+Data you want to write and where you want to put it 
+```{r}
+write_csv(lotr_words, file = "data/lotr_words_df.csv")
+```
 

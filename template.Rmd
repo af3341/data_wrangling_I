@@ -79,3 +79,6 @@ Data you want to write and where you want to put it
 write_csv(lotr_words, file = "data/lotr_words_df.csv")
 ```
 
+Don't use read.csv only use read_csv
+
+

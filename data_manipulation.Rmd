@@ -92,7 +92,54 @@ filter(litters_data, group == "Con7" & gd_of_birth == 20)
 
 A very common filtering step requires you to omit missing observations. You can do this with filter, but I recommend using drop_na from the tidyr package:
 
+```{r}
+library(tidyr)
+```
+
 drop_na(litters_data) will remove any row with a missing value
 drop_na(litters_data, wt_increase) will remove rows for which wt_increase is missing.
+
+Sometimes you need to select columns; sometimes you need to change them or create new ones. You can do this using mutate.
+
+The example below creates a new variable measuring the difference between gd18_weight and gd0_weight and modifies the existing group variable.
+
+```{r}
+mutate(litters_data,
+  wt_gain = gd18_weight - gd0_weight,
+  group = str_to_lower(group)
+)
+```
+You missed some things in lecture at this point, rewatch.
+
+### `arrange`
+
+Lets you arrange the rows in your dataset
+
+```{r}
+head(arrange(litters_data, group, pups_born_alive), 10)
+```
+
+```{r}
+head(arrange(litters_data, desc(group), pups_born_alive), 10)
+```
+
+It will only descend the group you put in parantheses after `desc`
+
+# Now piping
+
+Trying to end up with final dataset that we can use for our analysis in a smart way. 
+Command + shift + m inserts pipe operator. `%>%` 
+```{r}
+litters_data = 
+  read_csv("./data/FAS_litters.csv", col_types = "ccddiiii") %>%
+  janitor::clean_names() %>%
+  select(-pups_survive) %>%
+  mutate(
+    wt_gain = gd18_weight - gd0_weight,
+    group = str_to_lower(group)) %>% 
+  drop_na(wt_gain)
+
+litters_data
+```
 
 

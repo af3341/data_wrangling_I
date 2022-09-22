@@ -142,4 +142,11 @@ litters_data =
 litters_data
 ```
 
+The period for data tells R  to take the previous thing and put it in the data position. Put the tiblle from before. Basically this is showing you you can use nontidyverse functions with piping as long as you use the period. 
+```{r}
+litters_data %>%
+  lm(wt_gain ~ pups_born_alive, data = .) %>%
+  broom::tidy()
+```
+
 

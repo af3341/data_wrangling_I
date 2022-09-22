@@ -1,0 +1,56 @@
+---
+title: "Data Manipulation with dplyr"
+output: github_document
+date: "2022-09-22"
+---
+
+%>% is called a "pipe", read as "and then"
+
+Once you've imported data, you're going to need to so some cleaning up.
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE
+  fig.width = 6
+)
+```
+
+
+```{r}
+library(tidyverse)
+
+options(tibble.print_min = 3)
+
+litters_data = read_csv("./data/FAS_litters.csv",
+  col_types = "ccddiiii")
+litters_data = janitor::clean_names(litters_data)
+
+pups_data = read_csv("./data/FAS_pups.csv",
+  col_types = "ciiiii")
+pups_data = janitor::clean_names(pups_data)
+```
+
+```{r}
+select(litters_data, group, litter_number, gd0_weight, pups_born_alive)
+```
+
+```{r}
+select(litters_data, group:gd_of_birth)
+```
+
+You can also specify columns you'd like to remove: telling it you want everything except the pups_survive. Can drop more variables by doing , -variable name. 
+
+```{r}
+select(litters_data, -pups_survive)
+```
+
+In this process of selecting columns you are gonna use, you want to rename your variables. So with select you can select the columns and rename them in one step:
+
+```{r}
+select(litters_data, GROUP = group, LiTtEr_NuMbEr = litter_number)
+```
+
+
+
+
+
